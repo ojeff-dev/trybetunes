@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  box-sizing: border-box;
 }
 
 code {
@@ -22,4 +23,35 @@ code {
 .LinksHeader {
   display: flex;
   justify-content: space-around;
+}
+
+.ContainerAlbums {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.AlbumLinks {
+  text-decoration: none;
+}
+
+.AlbumCard {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.AlbumImage {
+  width: 100%;
+  object-fit: cover;
+}
+
+.AlbumInfo {
+  text-align: center;
+  width: 200px;
+  color: black;
+  font-weight: 600;
 }
