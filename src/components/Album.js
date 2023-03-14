@@ -64,7 +64,7 @@ class Album extends React.Component {
           {
             albumExist ? (
               <section className="AllMusics">
-                <MusicCard albums={ albums } />
+                <MusicCard albums={ albums } state={ this.state } />
               </section>
             )
               : <Loading />
