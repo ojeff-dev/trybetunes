@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor(props) {
@@ -13,13 +13,17 @@ class MusicCard extends React.Component {
     const { name, checked } = target;
     const { music, albumExist, handleCheckbox } = this.props;
 
-    handleCheckbox(name, checked);
-
-    albumExist(false);
-
-    await addSong(music);
-
-    albumExist(true);
+    if (checked) {
+      handleCheckbox(name, checked);
+      albumExist(false);
+      await addSong(music);
+      albumExist(true);
+    } else {
+      handleCheckbox(name, checked);
+      albumExist(false);
+      await removeSong(music);
+      albumExist(true);
+    }
   };
 
   render() {
