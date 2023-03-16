@@ -4,15 +4,15 @@ import Header from './Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from './MusicCard';
 import Loading from './Loading';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      albums: '',
-      artistName: 'Artist Name',
-      albumName: 'Collection Namee',
       albumExist: false,
+      albums: [],
+      favoritedSongs: [],
     };
   }
 
@@ -25,50 +25,70 @@ class Album extends React.Component {
     const ID = albumURL[2];
 
     // adiciona array de albuns no state
-    const allAlbums = await getMusics(ID);
-    const artist = [];
-    const album = [];
-    allAlbums.find((objectAlbum) => artist.push(objectAlbum.artistName));
-    allAlbums.find((objectAlbum) => album.push(objectAlbum.collectionName));
-
-    this.setState({
-      artistName: artist,
-      albumName: album,
-      albums: allAlbums,
+    const data = await getMusics(ID);
+    data.filter((objectAlbum) => this.setState((prevState) => ({
+      albums: [...prevState.albums, objectAlbum],
       albumExist: true,
+    })));
+
+    // adiciona os names do input e seus valores iniciais no state
+    data.filter((albums) => albums.trackName)
+      .map((music) => this.setState({ [music.trackName]: false }));
+
+    // salva músicas da lista de favoritos no state e liga o checkbox das músicas presentes na lista
+    const favorites = await getFavoriteSongs();
+    this.setState((prevState) => ({
+      favoritedSongs: [...prevState.favoritedSongs, favorites],
+    }));
+
+    favorites.forEach((favSong) => {
+      this.setState({ [favSong.trackName]: true });
     });
   }
 
+  // altera o valor da condicional de renderização no state
+  handleAlbumExist = (value) => {
+    this.setState({ albumExist: value });
+  };
+
+  // altera o valor dos checkbox no state
+  handleCheckbox = (name, value) => {
+    this.setState({ [name]: value });
+  };
+
   render() {
     const {
-      albums, albumExist, artistName,
-      albumName,
+      albums, albumExist,
     } = this.state;
+    const { state } = this;
+
     return (
       <div data-testid="page-album">
         <Header />
         <section className="PageAlbumContainer">
-          {
-            albumExist ? (
+          {albumExist ? (
+            <>
               <section>
-                <p data-testid="album-name">
-                  { albumName }
-                </p>
-                <p data-testid="artist-name">
-                  { artistName }
-                </p>
+                <p data-testid="album-name">{ albums[0].collectionName }</p>
+                <p data-testid="artist-name">{ albums[0].artistName }</p>
               </section>
-            )
-              : (null)
-          }
-          {
-            albumExist ? (
               <section className="AllMusics">
-                <MusicCard albums={ albums } state={ this.state } />
+                {albums
+                  .filter((track) => track.trackName)
+                  .map((music, index) => (
+                    <MusicCard
+                      music={ music }
+                      key={ index }
+                      albumExist={ this.handleAlbumExist }
+                      checkboxValue={ state[music.trackName] }
+                      handleCheckbox={ this.handleCheckbox }
+                    />
+                  ))}
               </section>
-            )
-              : <Loading />
-          }
+            </>
+          ) : (
+            <Loading />
+          )}
         </section>
       </div>
     );

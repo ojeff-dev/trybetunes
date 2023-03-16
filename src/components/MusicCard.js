@@ -1,91 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong } from '../services/favoriteSongsAPI';
-import Loading from './Loading';
 
 class MusicCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: false,
-      checkbox: {},
-    };
+  constructor(props) {
+    super(props);
+
+    this.state = {};
   }
 
-  handleChange = ({ target }) => {
-    const { albums } = this.props;
+  handleChange = async ({ target }) => {
     const { name, checked } = target;
-    const favoriteSong = albums.find((album) => album.trackName === name);
+    const { music, albumExist, handleCheckbox } = this.props;
 
-    if (checked) {
-      // aciona o loading do campo e add a música aos favoritos
-      this.setState({ loading: true }, async () => {
-        await addSong(favoriteSong);
-        this.setState((prevState) => ({
-          // remove o loading do campo e altera o status do checkbox clicado
-          loading: false,
-          checkbox: { ...prevState.checkbox, [name]: true },
-        }));
-      });
-    } else {
-      // desmarca o checkbox clicado
-      this.setState((prevState) => ({
-        checkbox: { ...prevState.checkbox, [name]: false },
-      }));
-    }
+    handleCheckbox(name, checked);
+
+    albumExist(false);
+
+    await addSong(music);
+
+    albumExist(true);
   };
 
   render() {
-    const { albums } = this.props;
-    const { loading, checkbox } = this.state;
+    const { music, checkboxValue } = this.props;
 
     return (
-      <div className="MusicsContainer">
-        {
-          loading ? <Loading />
-            : (
-              albums.map((album, index) => (
-                index > 0 ? (
-                  <section key={ index } className="Musics">
-                    <p>{ album.trackName }</p>
-                    <audio
-                      data-testid="audio-component"
-                      src={ album.previewUrl }
-                      controls
-                    >
-                      <track kind="captions" />
-                      O seu navegador não suporta o elemento
-                      {' '}
-                      <code>Audio</code>
-                    </audio>
-                    <label
-                      htmlFor=""
-                    >
-                      <span>Favorita</span>
-                      <input
-                        data-testid={ `checkbox-music-${album.trackId}` }
-                        onChange={ this.handleChange }
-                        type="checkbox"
-                        checked={ checkbox[album.trackName] }
-                        name={ album.trackName }
-                        id=""
-                      />
-                    </label>
-                  </section>
-                )
-                  : (null)
-              ))
-            )
-        }
+      <div>
+        <section className="Musics">
+          <p>{music.trackName}</p>
+          <audio data-testid="audio-component" src={ music.previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            {' '}
+            <code>Audio</code>
+          </audio>
+          <label htmlFor="">
+            <span>Favorita</span>
+            <input
+              data-testid={ `checkbox-music-${music.trackId}` }
+              onChange={ this.handleChange }
+              type="checkbox"
+              checked={ checkboxValue }
+              name={ music.trackName }
+              id=""
+            />
+          </label>
+        </section>
       </div>
     );
   }
 }
 
 MusicCard.propTypes = {
-  albums: PropTypes.arrayOf(PropTypes.shape({
-    artistName: PropTypes.string.isRequired,
+  music: PropTypes.objectOf(PropTypes.shape({
+    trackName: PropTypes.string.isRequired,
+    previewUrl: PropTypes.string.isRequired,
+    trackId: PropTypes.number.isRequired,
   })).isRequired,
+  albumExist: PropTypes.func.isRequired,
+  checkboxValue: PropTypes.bool.isRequired,
+  handleCheckbox: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

@@ -64,10 +64,7 @@ code {
 }
 
 .AllMusics {
-  width: 500px;
-}
-
-.MusicsContainer {
+  width: 600px;
   background-color: lightgray;
   display: flex;
   align-items: center;
