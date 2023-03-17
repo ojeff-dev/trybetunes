@@ -24,19 +24,25 @@ class Login extends React.Component {
     }
   };
 
-  handleClick = async (event) => {
+  handleClick = (event) => {
     event.preventDefault();
 
     // habilita o loading após o click no botão
-    this.setState({ loading: true });
+    this.setState({ loading: true }, async () => {
+      /* const { inputValue: { name } } = this.state;
+      const userInfo = {
+        name: `${name}`,
+        email: 'jeff-ds@outlook.com',
+        description: 'Minha descrição: 😄',
+      }; */
+      const { inputValue } = this.state;
+      await createUser(inputValue);
+      this.setState({ loading: false });
 
-    const { inputValue } = this.state;
-    await createUser(inputValue);
-
-    // desabilita o loading após conclusão da promise e muda de página
-    this.setState({ loading: false });
-    const { history } = this.props;
-    history.push('/search');
+      // desabilita o loading após conclusão da promise e muda de página
+      const { history } = this.props;
+      history.push('/search');
+    });
   };
 
   render() {
