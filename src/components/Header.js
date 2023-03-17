@@ -25,7 +25,7 @@ class Header extends React.Component {
           loading ? <Loading />
             : (
               <nav>
-                <p data-testid="header-user-name">{`Usuário: ${userName}`}</p>
+                <p data-testid="header-user-name">{`${userName}`}</p>
                 <section className="LinksHeader">
                   <Link
                     to="/search"
