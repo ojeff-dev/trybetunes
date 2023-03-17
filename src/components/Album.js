@@ -37,9 +37,7 @@ class Album extends React.Component {
 
     // salva músicas da lista de favoritos no state e liga o checkbox das músicas presentes na lista
     const favorites = await getFavoriteSongs();
-    this.setState((prevState) => ({
-      favoritedSongs: [...prevState.favoritedSongs, favorites],
-    }));
+    this.setState({ favoritedSongs: favorites });
 
     favorites.forEach((favSong) => {
       this.setState({ [favSong.trackName]: true });

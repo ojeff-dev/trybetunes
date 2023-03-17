@@ -39,7 +39,7 @@ class MusicCard extends React.Component {
             {' '}
             <code>Audio</code>
           </audio>
-          <label htmlFor="">
+          <label htmlFor={ music.trackName }>
             <span>Favorita</span>
             <input
               data-testid={ `checkbox-music-${music.trackId}` }
@@ -47,7 +47,7 @@ class MusicCard extends React.Component {
               type="checkbox"
               checked={ checkboxValue }
               name={ music.trackName }
-              id=""
+              id={ music.trackName }
             />
           </label>
         </section>
