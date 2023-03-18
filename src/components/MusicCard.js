@@ -59,12 +59,11 @@ MusicCard.propTypes = {
   albumExist: PropTypes.func.isRequired,
   checkboxValue: PropTypes.bool.isRequired,
   handleCheckbox: PropTypes.func.isRequired,
-  music: PropTypes.objectOf(PropTypes.shape({
+  music: PropTypes.shape({
     trackName: PropTypes.string,
     previewUrl: PropTypes.string,
     trackId: PropTypes.number,
-    wrapperType: PropTypes.string,
-  })).isRequired,
+  }).isRequired,
 };
 
 export default MusicCard;
