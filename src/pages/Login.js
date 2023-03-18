@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   constructor() {
@@ -29,12 +29,6 @@ class Login extends React.Component {
 
     // habilita o loading após o click no botão
     this.setState({ loading: true }, async () => {
-      /* const { inputValue: { name } } = this.state;
-      const userInfo = {
-        name: `${name}`,
-        email: 'jeff-ds@outlook.com',
-        description: 'Minha descrição: 😄',
-      }; */
       const { inputValue } = this.state;
       await createUser(inputValue);
       this.setState({ loading: false });

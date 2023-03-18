@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
-import Header from './Header';
-import Loading from './Loading';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 class Profile extends React.Component {
   constructor() {
@@ -16,30 +16,30 @@ class Profile extends React.Component {
 
   async componentDidMount() {
     const user = await getUser();
-    this.setState({ infoUser: [user], loading: false });
+    this.setState({ infoUser: user, loading: false });
   }
 
   render() {
-    const { infoUser, loading } = this.state;
+    const { infoUser: { name, email, image, description }, loading } = this.state;
     return (
       <div data-testid="page-profile">
         <Header />
         {loading ? (
           <Loading />
         ) : (
-          infoUser.map((user, index) => (
-            <section key={ index }>
-              <img
-                data-testid="profile-image"
-                src={ user.image }
-                alt="Foto de perfil"
-              />
-              <p>{user.name}</p>
-              <p>{user.email}</p>
-              <p>{user.description}</p>
+          <section>
+            <img
+              data-testid="profile-image"
+              src={ image }
+              alt="Foto de perfil"
+            />
+            <p>{name}</p>
+            <p>{email}</p>
+            <p>{description}</p>
+            <div>
               <Link to="/profile/edit">Editar perfil</Link>
-            </section>
-          ))
+            </div>
+          </section>
         )}
       </div>
     );
