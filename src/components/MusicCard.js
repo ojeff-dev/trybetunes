@@ -61,6 +61,7 @@ MusicCard.propTypes = {
     trackName: PropTypes.string.isRequired,
     previewUrl: PropTypes.string.isRequired,
     trackId: PropTypes.number.isRequired,
+    wrapperType: PropTypes.string.isRequired,
   })).isRequired,
   albumExist: PropTypes.func.isRequired,
   checkboxValue: PropTypes.bool.isRequired,

@@ -16,12 +16,12 @@ class Favorites extends React.Component {
 
   async componentDidMount() {
     const favorites = await getFavoriteSongs();
-    this.setState({ songs: favorites, albumExist: true }, () => {
-      // add o nome das tracks no state e seus valores
-      favorites.forEach((favSong) => {
-        this.setState({ [favSong.trackName]: true });
-      });
+    // add o nome das tracks no state e seus valores
+    favorites.forEach((favSong) => {
+      this.setState({ [favSong.trackName]: true });
     });
+
+    this.setState({ songs: favorites, albumExist: true });
   }
 
   async componentDidUpdate() {

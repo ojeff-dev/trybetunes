@@ -64,7 +64,7 @@ class ProfileEdit extends React.Component {
           loading ? <Loading />
             : (
               <form className="FormProfile">
-                <label htmlFor="">
+                <label htmlFor="name">
                   Nome do usuário
                   <input
                     data-testid="edit-input-name"
@@ -74,7 +74,7 @@ class ProfileEdit extends React.Component {
                     onChange={ this.handleChange }
                   />
                 </label>
-                <label htmlFor="">
+                <label htmlFor="email">
                   Email:
                   <input
                     type="email"
@@ -84,7 +84,7 @@ class ProfileEdit extends React.Component {
                     onChange={ this.handleChange }
                   />
                 </label>
-                <label htmlFor="">
+                <label htmlFor="description">
                   Descrição:
                   <textarea
                     name="description"
@@ -93,7 +93,7 @@ class ProfileEdit extends React.Component {
                     onChange={ this.handleChange }
                   />
                 </label>
-                <label htmlFor="">
+                <label htmlFor="image">
                   URL Imagem:
                   <input
                     type="text"
@@ -103,7 +103,7 @@ class ProfileEdit extends React.Component {
                     onChange={ this.handleChange }
                   />
                 </label>
-                <label htmlFor="">
+                <label>
                   <input
                     type="submit"
                     value="Salvar"
