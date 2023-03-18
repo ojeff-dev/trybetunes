@@ -26,8 +26,9 @@ class Favorites extends React.Component {
 
   async componentDidUpdate() {
     const favorites = await getFavoriteSongs();
+    const { songs } = this.state;
 
-    if (favorites) {
+    if (JSON.stringify(favorites) !== JSON.stringify(songs)) {
       this.setState({ songs: favorites });
     }
   }
@@ -46,7 +47,6 @@ class Favorites extends React.Component {
     return (
       <div data-testid="page-favorites">
         <Header />
-        <p>Componente Favorites</p>
         {
           albumExist ? (
             songs.map((song, index) => (

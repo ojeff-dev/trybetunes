@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {};
   }
@@ -17,13 +17,12 @@ class MusicCard extends React.Component {
       handleCheckbox(name, checked);
       albumExist(false);
       await addSong(music);
-      albumExist(true);
     } else {
       handleCheckbox(name, checked);
       albumExist(false);
       await removeSong(music);
-      albumExist(true);
     }
+    albumExist(true);
   };
 
   render() {
@@ -57,15 +56,15 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
-  music: PropTypes.objectOf(PropTypes.shape({
-    trackName: PropTypes.string.isRequired,
-    previewUrl: PropTypes.string.isRequired,
-    trackId: PropTypes.number.isRequired,
-    wrapperType: PropTypes.string.isRequired,
-  })).isRequired,
   albumExist: PropTypes.func.isRequired,
   checkboxValue: PropTypes.bool.isRequired,
   handleCheckbox: PropTypes.func.isRequired,
+  music: PropTypes.objectOf(PropTypes.shape({
+    trackName: PropTypes.string,
+    previewUrl: PropTypes.string,
+    trackId: PropTypes.number,
+    wrapperType: PropTypes.string,
+  })).isRequired,
 };
 
 export default MusicCard;
