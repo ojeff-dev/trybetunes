@@ -9,7 +9,7 @@ class Favorites extends React.Component {
     super();
 
     this.state = {
-      songs: '',
+      songs: [],
       albumExist: false,
     };
   }
@@ -56,6 +56,7 @@ class Favorites extends React.Component {
                 checkboxValue={ state[song.trackName] }
                 handleCheckbox={ this.handleCheckbox }
                 albumExist={ this.handleLoading }
+                trackId={ song.trackId.toString() }
               />
             ))
           )

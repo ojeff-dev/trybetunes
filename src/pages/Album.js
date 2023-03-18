@@ -80,6 +80,7 @@ class Album extends React.Component {
                       albumExist={ this.handleAlbumExist }
                       checkboxValue={ state[music.trackName] }
                       handleCheckbox={ this.handleCheckbox }
+                      trackId={ music.trackId.toString() }
                     />
                   ))}
               </section>

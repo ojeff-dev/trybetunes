@@ -26,7 +26,7 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { music, checkboxValue } = this.props;
+    const { music, checkboxValue, trackId } = this.props;
 
     return (
       <div>
@@ -41,7 +41,7 @@ class MusicCard extends React.Component {
           <label htmlFor={ music.trackName }>
             <span>Favorita</span>
             <input
-              data-testid={ `checkbox-music-${music.trackId}` }
+              data-testid={ `checkbox-music-${trackId}` }
               onChange={ this.handleChange }
               type="checkbox"
               checked={ checkboxValue }
@@ -59,10 +59,10 @@ MusicCard.propTypes = {
   albumExist: PropTypes.func.isRequired,
   checkboxValue: PropTypes.bool.isRequired,
   handleCheckbox: PropTypes.func.isRequired,
+  trackId: PropTypes.string.isRequired,
   music: PropTypes.shape({
     trackName: PropTypes.string,
     previewUrl: PropTypes.string,
-    trackId: PropTypes.number,
   }).isRequired,
 };
 
