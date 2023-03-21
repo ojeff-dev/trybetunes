@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
-import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
 
@@ -24,17 +24,14 @@ class Favorites extends React.Component {
     this.setState({ songs: favorites, albumExist: true });
   }
 
-  async componentDidUpdate() {
-    const favorites = await getFavoriteSongs();
+  handleCheckbox = async (name) => {
     const { songs } = this.state;
 
-    if (JSON.stringify(favorites) !== JSON.stringify(songs)) {
-      this.setState({ songs: favorites });
-    }
-  }
+    const filteredSongs = songs.filter((song) => song.trackName !== name);
+    this.setState({ songs: filteredSongs });
 
-  handleCheckbox = (name, value) => {
-    this.setState({ [name]: value });
+    // const song = songs.find((music) => music.trackName === name);
+    // await removeSong(song);
   };
 
   handleLoading = (value) => {
