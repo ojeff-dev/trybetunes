@@ -29,9 +29,6 @@ class Favorites extends React.Component {
 
     const filteredSongs = songs.filter((song) => song.trackName !== name);
     this.setState({ songs: filteredSongs });
-
-    // const song = songs.find((music) => music.trackName === name);
-    // await removeSong(song);
   };
 
   handleLoading = (value) => {
