@@ -45,31 +45,39 @@ class Login extends React.Component {
     const { statusBtn, loading } = this.state;
 
     return (
-      <div data-testid="page-login" className="login-container">
-        {
-          loading ? <Loading />
-            : (
-              <form>
-                <label htmlFor="">
-                  Nome de usuário
-                  <input
-                    type="text"
-                    data-testid="login-name-input"
-                    onChange={ this.handleChange }
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    disabled={ statusBtn }
-                    data-testid="login-submit-button"
-                    type="submit"
-                    value="Entrar"
-                    onClick={ this.handleClick }
-                  />
-                </label>
-              </form>
-            )
-        }
+      <div style={ { width: '100%', height: '100%' } }>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div data-testid="page-login" className="login-container">
+            <form className="login-form">
+              <img
+                src="trybetunes-logo.png"
+                alt="Trybetunes logo"
+                className="login-logo"
+              />
+              <label htmlFor="username">
+                <input
+                  className="login-input"
+                  type="text"
+                  data-testid="login-name-input"
+                  onChange={ this.handleChange }
+                  placeholder="Qual é o seu nome ?"
+                  id="username"
+                  name="username"
+                />
+              </label>
+              <input
+                className="login-submit"
+                disabled={ statusBtn }
+                data-testid="login-submit-button"
+                type="submit"
+                value="Entrar"
+                onClick={ this.handleClick }
+              />
+            </form>
+          </div>
+        )}
       </div>
     );
   }
