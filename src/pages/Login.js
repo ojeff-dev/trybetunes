@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
+import '../styles/login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -43,7 +45,7 @@ class Login extends React.Component {
     const { statusBtn, loading } = this.state;
 
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className="login-container">
         {
           loading ? <Loading />
             : (

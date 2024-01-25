@@ -11,7 +11,7 @@ import NotFound from './components/NotFound';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div style={ { width: '100%', height: '100%' } }>
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route exact path="/search" component={ Search } />
