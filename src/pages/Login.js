@@ -4,6 +4,7 @@ import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
 import '../styles/login.css';
+import TrybetunesLogo from '../images/trybetunes-logo.png';
 
 class Login extends React.Component {
   constructor() {
@@ -47,12 +48,12 @@ class Login extends React.Component {
     return (
       <div style={ { width: '100%', height: '100%' } }>
         {loading ? (
-          <Loading />
+          <Loading showDefaultBackground />
         ) : (
           <div data-testid="page-login" className="login-container">
             <form className="login-form">
               <img
-                src="trybetunes-logo.png"
+                src={ TrybetunesLogo }
                 alt="Trybetunes logo"
                 className="login-logo"
               />

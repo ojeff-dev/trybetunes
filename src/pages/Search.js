@@ -4,6 +4,9 @@ import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 
+import '../styles/search.css';
+import circleErrorIcon from '../images/circle-error-icon.png';
+
 class Search extends React.Component {
   constructor() {
     super();
@@ -11,7 +14,7 @@ class Search extends React.Component {
       inputValue: '',
       statusBtn: true,
       loading: false,
-      loadedAlbum: false,
+      wasItResearched: false,
       artistName: '',
       albums: [],
       messageAlbumNotFound: '',
@@ -29,87 +32,106 @@ class Search extends React.Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
 
     const { inputValue } = this.state;
-    // add nome do artista no state
-    this.setState({ artistName: inputValue }, async () => {
-      // adiciona os álbuns no state
+    this.setState({ loading: true, artistName: inputValue }, async () => {
       const allAlbums = await searchAlbumsAPI(inputValue);
-      allAlbums.map((album) => this.setState((prevState) => ({
-        albums: [...prevState.albums, album],
-      })));
-    });
-
-    this.setState(
-      {
-        inputValue: '',
-        loadedAlbum: true,
+      this.setState({
+        albums: allAlbums,
+        wasItResearched: true,
         loading: false,
+        inputValue: '',
+        statusBtn: true,
         messageAlbumNotFound: 'Nenhum Álbum foi encontrado',
-      },
-    );
+      });
+    });
   };
 
   render() {
     const {
-      statusBtn, inputValue, loading,
-      loadedAlbum, artistName, albums,
+      statusBtn,
+      inputValue,
+      loading,
+      artistName,
+      albums,
       messageAlbumNotFound,
+      wasItResearched,
     } = this.state;
+
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="page-search-container">
         <Header />
-        {
-          loading ? <Loading />
-            : (
-              <form>
-                <label htmlFor="">
-                  <input
-                    data-testid="search-artist-input"
-                    type="text"
-                    value={ inputValue }
-                    placeholder="Nome do Artista"
-                    onChange={ this.handleChange }
-                  />
-                </label>
-                <label htmlFor="">
-                  <input
-                    data-testid="search-artist-button"
-                    type="submit"
-                    value="Pesquisar"
-                    disabled={ statusBtn }
-                    onClick={ this.handleClick }
-                  />
-                </label>
-              </form>
-            )
-        }
-        <p>{`Resultado de álbuns de: ${artistName}`}</p>
-        <section className="ContainerAlbums">
-          {
-            loadedAlbum && albums.length > 0 ? (
-              albums.map((album) => (
-                <Link
-                  className="AlbumLinks"
-                  to={ `/album/${album.collectionId}` }
-                  key={ album.collectionId }
-                  data-testid={ `link-to-album-${album.collectionId}` }
-                >
-                  <section className="AlbumCard">
-                    <img
-                      className="AlbumImage"
-                      src={ album.artworkUrl100 }
-                      alt={ album.collectionName }
-                    />
-                    <p className="AlbumInfo">{ album.collectionName }</p>
-                    <p className="AlbumInfo">{ album.artistName }</p>
-                  </section>
-                </Link>
-              ))
-            )
-              : (<span>{ messageAlbumNotFound }</span>)
-          }
+        <form className="search-form">
+          <label
+            htmlFor=""
+            className="search-label"
+          >
+            <input
+              className="search-input"
+              data-testid="search-artist-input"
+              type="text"
+              value={ inputValue }
+              placeholder="Nome do Artista"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label
+            htmlFor=""
+            className="btn-search-label"
+          >
+            <input
+              className="search-submit"
+              data-testid="search-artist-button"
+              type="submit"
+              value="Pesquisar"
+              disabled={ statusBtn }
+              onClick={ this.handleClick }
+            />
+          </label>
+        </form>
+        <section className="albums-container">
+          { loading && <Loading /> }
+          { !loading && albums.length > 0 && (
+            <>
+              <p className="result-title">{`Resultado de álbuns de ${artistName}:`}</p>
+              <section
+                className="album-cards-container"
+              >
+                {albums.map((album) => (
+                  <div
+                    className="album-info"
+                    key={ album.collectionId }
+                  >
+                    <Link
+                      className="album-card"
+                      to={ `/album/${album.collectionId}` }
+                      data-testid={ `link-to-album-${album.collectionId}` }
+                    >
+                      <img
+                        className="album-image"
+                        src={ album.artworkUrl100 }
+                        alt={ album.collectionName }
+                      />
+                    </Link>
+                    <section className="album-name-container">
+                      <span className="album-name">{album.collectionName}</span>
+                      <span className="album-authors">{album.artistName}</span>
+                    </section>
+                  </div>
+                ))}
+              </section>
+            </>
+          )}
+          {!loading && albums.length === 0 && wasItResearched && (
+            <section className="not-found-message-container">
+              <img src={ circleErrorIcon } alt="album not found icon" />
+              <span
+                className="not-found-message"
+              >
+                {messageAlbumNotFound}
+              </span>
+            </section>
+          )}
         </section>
       </div>
     );

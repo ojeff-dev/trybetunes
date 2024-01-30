@@ -1,0 +1,21 @@
+.loading-header-container {
+  display: grid;
+  grid-template-areas: "icon text";
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  height: max-content;
+  margin-bottom: 1rem;
+}
+
+.loading-header-icon {
+  grid-area: icon;
+  color: #00D5E2;
+  font-size: 2rem;
+}
+
+.loading-header-text {
+  grid-area: text;
+  color: #003BE5;
+  font-size: 1.1rem;
+}

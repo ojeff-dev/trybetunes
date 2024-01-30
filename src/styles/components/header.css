@@ -1,0 +1,119 @@
+.header-container {
+  width: 100%;
+  height: 100%;
+}
+
+.nav-container {
+  display: grid;
+  grid-template-areas:
+    "logo"
+    "links"
+    "loading-or-userName";
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 4fr 1fr;
+  gap: 1rem;
+  height: 100%;
+}
+
+.nav-logo {
+  grid-area: logo;
+  align-self: center;
+  justify-self: center;
+  padding: 0.5rem;
+}
+
+.nav-links {
+  grid-area: links;
+  align-self: top;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  height: max-content;
+}
+
+.link-element {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: #444955;
+  font-size: 1.1rem;
+  text-decoration: none;
+  width: max-content;
+}
+
+.link-element:active,
+.link-element:focus {
+  font-weight: bold;
+}
+
+.link-element:hover {
+  color: #000000;
+}
+
+.link-element:active > img,
+.link-element:focus > img {
+  filter: invert(100%);
+}
+
+.loading-header-container {
+  grid-area: loading-or-userName;
+  align-self: end;
+  justify-self: center;
+}
+
+.userName-header-container {
+  grid-area: loading-or-userName;
+  align-self: end;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #444955;
+  font-size: 1.1rem;
+  width: max-content;
+  height: max-content;
+  margin-bottom: 1rem;
+}
+
+.userName-header-container > img {
+  align-self: center;
+  justify-self: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-container {
+    grid-template-rows: auto auto auto;
+    gap: 0.4rem;
+  }
+  .nav-logo {
+    align-self: center;
+    justify-self: center;
+    width: 100px;
+    height: auto;
+  }
+  .nav-links {
+    align-self: center;
+    justify-self: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    height: max-content;
+  }
+
+  .loading-header-container,
+  .userName-header-container {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .loading-header-icon,
+  .userName-header-container > img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
