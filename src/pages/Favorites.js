@@ -4,6 +4,8 @@ import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
 
+import '../styles/favorites.css';
+
 class Favorites extends React.Component {
   constructor() {
     super();
@@ -39,10 +41,15 @@ class Favorites extends React.Component {
     const { songs, albumExist } = this.state;
     const { state } = this;
     return (
-      <div data-testid="page-favorites">
+      <div data-testid="page-favorites" className="page-favorites-container">
         <Header />
-        {
-          albumExist ? (
+        <section className="page-title">
+          <span className="page-title-text">
+            Favorite songs
+          </span>
+        </section>
+        <section className="page-songs-section">
+          {albumExist ? (
             songs.map((song, index) => (
               <MusicCard
                 key={ index }
@@ -54,8 +61,8 @@ class Favorites extends React.Component {
               />
             ))
           )
-            : <Loading />
-        }
+            : <Loading showDefaultBackground={ false } />}
+        </section>
       </div>
     );
   }

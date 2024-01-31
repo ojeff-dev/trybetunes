@@ -42,7 +42,7 @@ class Search extends React.Component {
         loading: false,
         inputValue: '',
         statusBtn: true,
-        messageAlbumNotFound: 'Nenhum Álbum foi encontrado',
+        messageAlbumNotFound: 'No albums found.',
       });
     });
   };
@@ -71,7 +71,7 @@ class Search extends React.Component {
               data-testid="search-artist-input"
               type="text"
               value={ inputValue }
-              placeholder="Nome do Artista"
+              placeholder="Artist name"
               onChange={ this.handleChange }
             />
           </label>
@@ -83,7 +83,7 @@ class Search extends React.Component {
               className="search-submit"
               data-testid="search-artist-button"
               type="submit"
-              value="Pesquisar"
+              value="Search"
               disabled={ statusBtn }
               onClick={ this.handleClick }
             />
@@ -93,7 +93,7 @@ class Search extends React.Component {
           { loading && <Loading showDefaultBackground={ false } /> }
           { !loading && albums.length > 0 && (
             <>
-              <p className="result-title">{`Resultado de álbuns de ${artistName}:`}</p>
+              <p className="result-title">{`Albums result for ${artistName}:`}</p>
               <section
                 className="album-cards-container"
               >

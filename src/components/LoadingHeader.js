@@ -9,7 +9,7 @@ class LoadingHeader extends React.Component {
     return (
       <div className="loading-header-container">
         <FontAwesomeIcon icon={ faSpinner } className="loading-header-icon" spin />
-        <span className="loading-header-text">Carregando...</span>
+        <span className="loading-header-text">Loading...</span>
       </div>
     );
   }

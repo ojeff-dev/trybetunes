@@ -30,13 +30,11 @@ class Login extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
 
-    // habilita o loading após o click no botão
     this.setState({ loading: true }, async () => {
       const { inputValue } = this.state;
       await createUser(inputValue);
       this.setState({ loading: false });
 
-      // desabilita o loading após conclusão da promise e muda de página
       const { history } = this.props;
       history.push('/search');
     });
@@ -63,7 +61,7 @@ class Login extends React.Component {
                   type="text"
                   data-testid="login-name-input"
                   onChange={ this.handleChange }
-                  placeholder="Qual é o seu nome ?"
+                  placeholder="What is your name?"
                   id="username"
                   name="username"
                 />
@@ -73,7 +71,7 @@ class Login extends React.Component {
                 disabled={ statusBtn }
                 data-testid="login-submit-button"
                 type="submit"
-                value="Entrar"
+                value="sign in"
                 onClick={ this.handleClick }
               />
             </form>

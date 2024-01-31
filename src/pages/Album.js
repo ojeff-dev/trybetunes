@@ -22,19 +22,15 @@ class Album extends React.Component {
     const { history } = this.props;
     const { location: { pathname } } = history;
 
-    // captura o ID do album
     const albumURL = pathname.split('/');
     const ID = albumURL[2];
 
-    // adiciona array de albuns no state
     const data = await getMusics(ID);
     this.setState({ albums: data });
 
-    // adiciona os names do input e seus valores iniciais no state
     data.filter((albums) => albums.trackName)
       .map((music) => this.setState({ [music.trackName]: false }));
 
-    // salva músicas da lista de favoritos no state e liga o checkbox das músicas presentes na lista
     const favorites = await getFavoriteSongs();
     this.setState({ favoritedSongs: favorites, albumExist: true });
 
@@ -43,7 +39,6 @@ class Album extends React.Component {
     });
   }
 
-  // altera o valor dos checkbox no state
   handleCheckbox = (name, value) => {
     this.setState({ [name]: value });
   };

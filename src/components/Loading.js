@@ -13,7 +13,7 @@ class Loading extends React.Component {
         className={ showDefaultBackground ? 'loading-container' : 'loading-albums' }
       >
         <FontAwesomeIcon icon={ faSpinner } className="loading-icon" spin />
-        <span className="loading-text">Carregando...</span>
+        <span className="loading-text">Loading...</span>
       </div>
     );
   }
