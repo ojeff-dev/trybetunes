@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
+import '../styles/components/musicCard.css';
+
 class MusicCard extends React.Component {
   constructor() {
     super();
@@ -11,35 +13,36 @@ class MusicCard extends React.Component {
 
   handleChange = async ({ target }) => {
     const { name, checked } = target;
-    const { music, albumExist, handleCheckbox } = this.props;
+    const { music, handleCheckbox } = this.props;
+
+    handleCheckbox(name, checked);
 
     if (checked) {
-      handleCheckbox(name, checked);
-      albumExist(false);
       await addSong(music);
     } else {
-      handleCheckbox(name, checked);
-      albumExist(false);
       await removeSong(music);
     }
-    albumExist(true);
   };
 
   render() {
     const { music, checkboxValue, trackId } = this.props;
 
     return (
-      <div>
-        <section className="Musics">
-          <p>{music.trackName}</p>
-          <audio data-testid="audio-component" src={ music.previewUrl } controls>
+      <div className="songs-container">
+        <section className="songs-content">
+          <span className="music-name">{music.trackName}</span>
+          <audio
+            className="music-audio"
+            data-testid="audio-component"
+            src={ music.previewUrl }
+            controls
+          >
             <track kind="captions" />
             O seu navegador não suporta o elemento
             {' '}
             <code>Audio</code>
           </audio>
           <label htmlFor={ music.trackName }>
-            <span>Favorita</span>
             <input
               data-testid={ `checkbox-music-${trackId}` }
               onChange={ this.handleChange }
@@ -56,7 +59,6 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
-  albumExist: PropTypes.func.isRequired,
   checkboxValue: PropTypes.bool.isRequired,
   handleCheckbox: PropTypes.func.isRequired,
   trackId: PropTypes.string.isRequired,

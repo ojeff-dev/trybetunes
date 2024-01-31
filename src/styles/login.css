@@ -50,6 +50,7 @@
 
 .login-input,
 .login-submit {
+  font-family: 'Epilogue', sans-serif;
   width: 100%;
   padding: 0.4rem 1rem;
 }

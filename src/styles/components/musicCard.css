@@ -1,0 +1,65 @@
+.songs-container {
+  width: max-content;
+  height: max-content;
+  border-bottom: 1px solid #CCD4E1;
+  margin: 0.5rem;
+}
+
+.songs-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1rem 0;
+  width: max-content;
+  height: max-content;
+}
+
+.music-name {
+  font-family: 'Epilogue', sans-serif;
+  color: #001813;
+  width: 14rem;
+}
+
+.music-audio {
+  width: 20rem;
+}
+
+.music-audio::-webkit-media-controls-panel {
+  background-color: #FFFFFF;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1.4rem;
+  height: 2rem;
+  background:
+    url('../../images/heart-icon-normal.png') no-repeat center center;
+  background-size: 100%;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background:
+    url('../../images/heart-icon-liked.png') no-repeat center center;
+  background-size: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .songs-container {
+    margin: auto;
+  }
+
+  .songs-content {
+    width: 100vw;
+  }
+
+  .music-name {
+    margin-left: 0.5rem;
+  }
+
+  .music-audio {
+    width: 20rem;
+  }
+}

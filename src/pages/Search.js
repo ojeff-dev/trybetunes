@@ -90,7 +90,7 @@ class Search extends React.Component {
           </label>
         </form>
         <section className="albums-container">
-          { loading && <Loading /> }
+          { loading && <Loading showDefaultBackground={ false } /> }
           { !loading && albums.length > 0 && (
             <>
               <p className="result-title">{`Resultado de álbuns de ${artistName}:`}</p>

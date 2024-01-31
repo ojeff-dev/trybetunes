@@ -6,6 +6,8 @@ import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
+import '../styles/album.css';
+
 class Album extends React.Component {
   constructor(props) {
     super(props);
@@ -26,10 +28,7 @@ class Album extends React.Component {
 
     // adiciona array de albuns no state
     const data = await getMusics(ID);
-    data.filter((objectAlbum) => this.setState((prevState) => ({
-      albums: [...prevState.albums, objectAlbum],
-      albumExist: true,
-    })));
+    this.setState({ albums: data });
 
     // adiciona os names do input e seus valores iniciais no state
     data.filter((albums) => albums.trackName)
@@ -37,17 +36,12 @@ class Album extends React.Component {
 
     // salva músicas da lista de favoritos no state e liga o checkbox das músicas presentes na lista
     const favorites = await getFavoriteSongs();
-    this.setState({ favoritedSongs: favorites });
+    this.setState({ favoritedSongs: favorites, albumExist: true });
 
     favorites.forEach((favSong) => {
       this.setState({ [favSong.trackName]: true });
     });
   }
-
-  // altera o valor da condicional de renderização no state
-  handleAlbumExist = (value) => {
-    this.setState({ albumExist: value });
-  };
 
   // altera o valor dos checkbox no state
   handleCheckbox = (name, value) => {
@@ -61,32 +55,51 @@ class Album extends React.Component {
     const { state } = this;
 
     return (
-      <div data-testid="page-album">
+      <div data-testid="page-album" className="page-album-container">
         <Header />
-        <section className="PageAlbumContainer">
+        <div className="background-blue" />
+        <section className="album-container">
           {albumExist ? (
             <>
-              <section>
-                <p data-testid="album-name">{ albums[0].collectionName }</p>
-                <p data-testid="artist-name">{ albums[0].artistName }</p>
+              <section className="album-info-container">
+                <img
+                  className="music-image"
+                  src={ albums[0].artworkUrl100 }
+                  alt={ albums[0].collectionName }
+                />
+                <div>
+                  <span
+                    data-testid="album-name"
+                    className="album-name-text"
+                  >
+                    {albums[0].collectionName}
+                  </span>
+                  <span
+                    className="artist-name-text"
+                    data-testid="artist-name"
+                  >
+                    {albums[0].artistName}
+                  </span>
+                </div>
               </section>
-              <section className="AllMusics">
-                {albums
-                  .filter((track) => track.trackName)
-                  .map((music, index) => (
-                    <MusicCard
-                      music={ music }
-                      key={ index }
-                      albumExist={ this.handleAlbumExist }
-                      checkboxValue={ state[music.trackName] }
-                      handleCheckbox={ this.handleCheckbox }
-                      trackId={ music.trackId.toString() }
-                    />
-                  ))}
-              </section>
+              <div className="album-songs-container">
+                <section className="album-songs">
+                  {albums
+                    .filter((track) => track.trackName)
+                    .map((music, index) => (
+                      <MusicCard
+                        music={ music }
+                        key={ index }
+                        checkboxValue={ state[music.trackName] }
+                        handleCheckbox={ this.handleCheckbox }
+                        trackId={ music.trackId.toString() }
+                      />
+                    ))}
+                </section>
+              </div>
             </>
           ) : (
-            <Loading />
+            <Loading showDefaultBackground={ false } />
           )}
         </section>
       </div>

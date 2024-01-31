@@ -38,6 +38,7 @@
   align-items: center;
   gap: 1.5rem;
   color: #444955;
+  font-family: 'Epilogue', sans-serif;
   font-size: 1.1rem;
   text-decoration: none;
   width: max-content;
@@ -71,6 +72,7 @@
   align-items: center;
   gap: 0.5rem;
   color: #444955;
+  font-family: 'Epilogue', sans-serif;
   font-size: 1.1rem;
   width: max-content;
   height: max-content;

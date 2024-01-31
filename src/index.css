@@ -6,12 +6,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
+  font-family: 'Epilogue', sans-serif;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -20,11 +15,6 @@ body {
 #root {
   width: 100%;
   height: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 .AllMusics {
@@ -38,11 +28,6 @@ code {
   height: 600px;
   overflow-y: scroll;
   padding: 10px;
-}
-
-.Musics {
-  border: 1px solid gray;
-  border-radius: 10px;
 }
 
 .FormProfile {
