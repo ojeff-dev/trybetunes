@@ -18,7 +18,6 @@ class Favorites extends React.Component {
 
   async componentDidMount() {
     const favorites = await getFavoriteSongs();
-    // add o nome das tracks no state e seus valores
     favorites.forEach((favSong) => {
       this.setState({ [favSong.trackName]: true });
     });

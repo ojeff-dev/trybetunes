@@ -1,0 +1,69 @@
+.not-found-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12rem;
+  justify-content: center;
+}
+
+.not-found-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(45deg, rgba(0, 213, 226, 1) 0%, rgba(0, 59, 229, 1) 100%);
+  z-index: 0;
+}
+
+.not-found-container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../images/bg-not-found.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+}
+
+.not-found-title {
+  color: #003BE5;
+  font-size: 10rem;
+  font-weight: 400;
+  width: max-content;
+  z-index: 2;
+}
+
+.not-found-message {
+  color: #00D5E2;
+  font-size: 2rem;
+  width: 22rem;
+  z-index: 2;
+}
+
+@media screen and (max-width: 768px) {
+  .not-found-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .not-found-container::after {
+    background: linear-gradient(-45deg, rgba(0, 213, 226, 1) 0%, rgba(0, 59, 229, 1) 100%);
+  }
+
+  .not-found-title {
+    font-size: 5rem;
+    margin: 0 auto;
+  }
+
+  .not-found-message {
+    font-size: 1.5rem;
+    margin: 0 auto;
+    width: 80%;
+  }
+}
