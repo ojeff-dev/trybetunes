@@ -99,11 +99,11 @@ Follow the steps below to run the project locally using Docker or Node.js.
 
 3. Build the Docker image:
    ```bash
-   docker build -t `[your-image-name]` .
+   docker build -t `your-image-name` .
 
 4. Run the Docker container:
    ```bash
-   docker run -p `[your-chosen-port]`:3000 `[your-image-name]`
+   docker run -p `your-chosen-port`:3000 `your-image-name`
 
 - Example:
   ```bash
