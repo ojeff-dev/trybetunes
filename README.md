@@ -107,8 +107,8 @@ Follow the steps below to run the project locally using Docker or Node.js.
 
 - Example:
   ```bash
-  docker build -t trybetunes-image
-  docker run -p 8080:3000 trybetunes
+  docker build -t trybetunes-image .
+  docker run -p 8080:3000 trybetunes-image
 
 ### With Node.js:
 
@@ -131,5 +131,4 @@ Follow the steps below to run the project locally using Docker or Node.js.
 
 Feel free to connect with me on LinkedIn or check out my portfolio:
 
-- [LinkedIn](https://www.linkedin.com/in/ojefferson/)
-- [Portfolio](https://ojeff.com/)
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ojefferson/) [![Portfolio](https://img.shields.io/badge/Portfolio-255E63?style=for-the-badge&logo=About.me&logoColor=white)](https://ojeff.com/)
